@@ -8,18 +8,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.service.UserServiceFind;
 
 import javax.validation.Valid;
 
 
 @Controller
-@RequestMapping("/")
-public class UsersController {
+@RequestMapping("/admin")
+public class AdminController {
     private final UserService userService;
-
+    private final UserServiceFind userServiceFind;
     @Autowired
-    public UsersController(UserService userService) {
+    public AdminController(UserService userService, UserServiceFind userServiceFind) {
         this.userService = userService;
+        this.userServiceFind = userServiceFind;
     }
 
     @RequestMapping(value = "/allusers")
@@ -36,7 +38,6 @@ public class UsersController {
 
     @RequestMapping("saveUser")
     public String saveUser(ModelMap modelMap, @Valid User user, BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             modelMap.addAttribute(user);
             return "redirect:/allusers";
