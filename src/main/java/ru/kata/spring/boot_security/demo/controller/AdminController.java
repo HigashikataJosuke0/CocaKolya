@@ -17,47 +17,46 @@ import javax.validation.Valid;
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
-    private final UserServiceFind userServiceFind;
+
     @Autowired
-    public AdminController(UserService userService, UserServiceFind userServiceFind) {
+    public AdminController(UserService userService) {
         this.userService = userService;
-        this.userServiceFind = userServiceFind;
+
     }
 
-    @RequestMapping(value = "/allusers")
+    @GetMapping
       public String getAllUsers(ModelMap model) {
         model.addAttribute("allusers", userService.getAll());
         return "allusers";
     }
 
-    @RequestMapping("/addnewuser")
+    @GetMapping("addnewuser")
     public String addNewUser(ModelMap model) {
         model.addAttribute("user", new User());
         return "/addnewuser";
     }
 
-    @RequestMapping("saveUser")
+    @PostMapping("saveUser")
     public String saveUser(ModelMap modelMap, @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             modelMap.addAttribute(user);
-            return "redirect:/allusers";
+            return "redirect:/admin/";
         }
 
         userService.save(user);
 
-        return "redirect:/allusers";
+        return "redirect:/admin/";
     }
-
-    @RequestMapping("/updateInfo")
+    @GetMapping("updateInfo")
     public String updateUser(@RequestParam("usrId") long id, ModelMap model) {
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
         return "/addnewuser";
     }
 
-    @RequestMapping("/deleteUser")
+    @GetMapping("deleteUser")
     public String deleteUser(@RequestParam("usrId") long id) {
         userService.removeById(id);
-        return "redirect:/allusers";
+        return "redirect:/admin/";
     }
 }

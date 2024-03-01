@@ -8,27 +8,30 @@
 <body>
 <h2>User info</h2>
 <br>
-<form th:method="POST" th:action="@{/saveUser}" th:object="${user}">
+<form th:method="POST" th:action="@{/admin/saveUser}" th:object="${user}">
 
     <input type="hidden" th:field="*{id}" />
 
     Name <label>
-    <input name="username" type="text" >
+    <input name="username" type="text"/>
 </label>
     <br>
     <br>
     Surname <label>
-    <input name="surname" type="text" >
+    <input name="surname" type="text"/>
 </label>
     <br>
     <br>
     Salary <label>
-    <input name="salary" type="text">
+    <input name="salary" type="text"/>
 </label>
     <br>
     <br>
-    <input type="submit" value="OK">
-
-</form>
+    Password <label>
+    <input name="password" type="text"/>
+    <br>
+    <br>
+    <input type="submit" value="OK"/>
+ </form>
 </body>
 </html>

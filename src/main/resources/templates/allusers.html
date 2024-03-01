@@ -12,6 +12,7 @@
         <th>Name</th>
         <th>Surname</th>
         <th>Salary</th>
+        <th>Password</th>
         <br>
         <th>Operation</th>
     </tr>
@@ -20,15 +21,16 @@
         <td th:text="${user.username}">Null</td>
         <td th:text="${user.surname}">Null</td>
         <td th:text="${user.salary}">Null</td>
+        <td th:text="${user.password}">Null</td>
         <td>
-            <a th:href="@{/updateInfo (usrId=${user.id})}">Update</a>
-            <a th:href="@{/deleteUser(usrId=${user.id})}">Delete</a>
+            <a th:href="@{/admin/updateInfo (usrId=${user.id})}">Update</a>
+            <a th:href="@{/admin/deleteUser(usrId=${user.id})}">Delete</a>
         </td>
     </tr>
 </table>
 <br><br>
 <input type="button" value="Add"
-       onclick="window.location.href = 'addnewuser'"/>
+       onclick="window.location.href = '/admin/addnewuser'"/>
 
 </body>
 </html>
