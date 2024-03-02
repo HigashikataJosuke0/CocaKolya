@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,11 +26,11 @@ public class UserController {
     }
 
     @GetMapping
-    public String getUserById (Principal principal, ModelMap modelMap){
+    public String getUserById (Principal principal, Model modelMap){
         User user = userServiceFind.findByUSerName(principal.getName());
         System.out.println(user);
         modelMap.addAttribute("user",user.getUsername()+" "+user
-                .getSurname()+" "+user.getSalary()+" "+user.getPassword());
+                .getSurname()+" "+user.getSalary());
         return "user";
     }
 }
